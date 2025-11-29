@@ -197,6 +197,55 @@
             margin-bottom: 8px;
         }
         
+        .personal-notes {
+            background: #f8f9fa;
+            padding: 35px;
+            border-radius: 12px;
+            margin-top: 30px;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .personal-notes h2 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.6em;
+        }
+        
+        .personal-notes .subtitle {
+            color: #666;
+            font-size: 0.95em;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        
+        .notes-textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 18px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 1em;
+            line-height: 1.6;
+            resize: none;
+            overflow: hidden;
+            transition: border-color 0.3s ease;
+            background: white;
+        }
+        
+        .notes-textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .notes-info {
+            margin-top: 12px;
+            color: #888;
+            font-size: 0.85em;
+            text-align: right;
+        }
+        
         @media (max-width: 768px) {
             .options-wrapper {
                 grid-template-columns: 1fr;
@@ -207,6 +256,10 @@
             }
             
             .content {
+                padding: 20px;
+            }
+            
+            .personal-notes {
                 padding: 20px;
             }
         }
@@ -232,39 +285,45 @@
             </div>
             
             <div class="options-wrapper">
-                <div class="option">
+                <div class="option recommended">
                     <div class="option-header">
                         <h3>Option 1</h3>
+                        <span class="badge">RECOMMENDED</span>
                     </div>
                     
                     <div class="option-details">
                         <h4>Configuration</h4>
-                        <p>Sell 2 acres now from your 7-acre share in <a href="https://anandvip.github.io/lsdecision/" target="_blank">option1</a></p>
-                        <p>Keep 5 acres partitioned for future sale</p>
+                        <p>Sell 2 acres now from your 7-acre share</p>
+                        <p>Keep 5 acres partitioned for future opportunities</p>
                         <p>12 acres remain generating contract income</p>
                     </div>
                     
                     <div class="logic-section">
-                        <h4>The Logic</h4>
+                        <h4>Why This Preserves Your Peace of Mind</h4>
                         <div class="logic-item">
-                            Smaller immediate sale, but requires returning to sale process later
+                            You retain most of your ancestral land (5 acres vs just 2)
                         </div>
                         <div class="logic-item">
-                            5-acre partition retains future flexibility
+                            Daughter's marriage funded without liquidating family heritage
                         </div>
                         <div class="logic-item">
-                            Higher contract income from 12 acres
+                            Your agricultural identity and connection to land remains intact
                         </div>
                         <div class="logic-item">
-                            Multiple sale efforts over time
+                            5-acre partition preserves future flexibility - sell only if truly needed
+                        </div>
+                        <div class="logic-item">
+                            Higher ongoing contract income from 12 acres
+                        </div>
+                        <div class="logic-item">
+                            Your son inherits a father who kept substantial land, not one who sold most of it
                         </div>
                     </div>
                 </div>
                 
-                <div class="option recommended">
+                <div class="option">
                     <div class="option-header">
                         <h3>Option 2</h3>
-                        <span class="badge">RECOMMENDED</span>
                     </div>
                     
                     <div class="option-details">
@@ -276,24 +335,24 @@
                     </div>
                     
                     <div class="logic-section">
-                        <h4>Why This Makes Sense</h4>
+                        <h4>The Numbers Logic</h4>
                         <div class="logic-item">
-                            ₹3.5 crore covers daughter's marriage + aging expenses cushion
+                            Maximum immediate capital (₹3.5 crore total)
                         </div>
                         <div class="logic-item">
-                            Single transaction - simpler than multiple sales over time
+                            Single transaction effort
                         </div>
                         <div class="logic-item">
-                            2-acre partition enables industrial CLU conversion (higher value appreciation)
+                            2-acre partition enables industrial CLU conversion
                         </div>
                         <div class="logic-item">
-                            9 acres contract income continues flowing
+                            But leaves you with only 2 acres - most of ancestral land gone
                         </div>
                         <div class="logic-item">
-                            One-time effort - no need to return to sale process later
+                            Reduced contract income from 9 acres vs 12 acres
                         </div>
                         <div class="logic-item">
-                            Clean execution before potential agricultural-to-urban reclassification
+                            This is liquidation, not preservation
                         </div>
                     </div>
                 </div>
@@ -302,19 +361,70 @@
             <div class="recommendation">
                 <h2>Peace of Mind Analysis</h2>
                 <div class="recommendation-content">
-                    <p>Option 2 provides a cleaner path forward because it addresses your immediate priorities with a single decisive action. The ₹3.5 crore capital gives you financial security for your daughter's marriage and creates a buffer for aging expenses.</p>
+                    <p>Option 1 honors both your immediate needs and your identity as a family man with ancestral roots in this land.</p>
                     
-                    <p>The 2-acre partition positioned for industrial CLU conversion offers premium appreciation potential, while the remaining 9 acres continue generating contract income.</p>
+                    <p>Selling 2 acres addresses your daughter's marriage and provides some cushion for aging expenses, while keeping 5 acres means you retain the majority of your heritage. You're not liquidating your family's connection to this land - you're making a measured decision that balances necessity with preservation.</p>
                     
-                    <p>Most importantly, you complete this transaction once and move forward, rather than cycling back into the sale process when your negotiating position may be different.</p>
+                    <p>The 5-acre partition gives you genuine flexibility. If future circumstances genuinely require it, you can sell more. But you're not forced into that decision now based on speculation about future value or efficiency calculations.</p>
+                    
+                    <p>Your son will see a father who provided for his sister's marriage while maintaining substantial ancestral land - not one who sold off most of the family property in a single transaction.</p>
                     
                     <div class="tradeoff">
-                        <strong>The Trade-off:</strong>
-                        3 acres less contract income compared to Option 1, but the ₹3.5 crore capital deployment can offset this difference through strategic investments while maintaining your tax-efficient dual income structure.
+                        <strong>What You Gain:</strong>
+                        You keep your agricultural identity intact, maintain higher contract income (12 acres vs 9), preserve family heritage, and retain the dignity of measured decision-making rather than wholesale liquidation. The 2-acre sale addresses immediate needs without sacrificing what connects you to generations past and future.
                     </div>
                 </div>
             </div>
+            
+            <div class="personal-notes">
+                <h2>My Personal Reflections</h2>
+                <p class="subtitle">This space is for you alone - to validate your thoughts, archive your experiences, and reflect on this journey without depending on others for validation.</p>
+                <textarea 
+                    class="notes-textarea" 
+                    id="personalNotes"
+                    placeholder="Write your thoughts, feelings, and reflections here. Your notes are saved automatically and remain private in your browser..."
+                ></textarea>
+                <div class="notes-info">Your notes are saved automatically in your browser</div>
+            </div>
         </div>
     </div>
+    
+    <script>
+        // Get the textarea element
+        const notesTextarea = document.getElementById('personalNotes');
+        const STORAGE_KEY = 'vipul_land_decision_notes';
+        
+        // Auto-adjust height function
+        function autoAdjustHeight() {
+            notesTextarea.style.height = 'auto';
+            notesTextarea.style.height = notesTextarea.scrollHeight + 'px';
+        }
+        
+        // Load saved notes from localStorage
+        function loadNotes() {
+            const savedNotes = localStorage.getItem(STORAGE_KEY);
+            if (savedNotes) {
+                notesTextarea.value = savedNotes;
+                autoAdjustHeight();
+            }
+        }
+        
+        // Save notes to localStorage
+        function saveNotes() {
+            localStorage.setItem(STORAGE_KEY, notesTextarea.value);
+        }
+        
+        // Event listeners
+        notesTextarea.addEventListener('input', function() {
+            autoAdjustHeight();
+            saveNotes();
+        });
+        
+        // Load notes when page loads
+        window.addEventListener('load', loadNotes);
+        
+        // Auto-adjust on window resize
+        window.addEventListener('resize', autoAdjustHeight);
+    </script>
 </body>
 </html>
