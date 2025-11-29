@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Land Sale Decision Record — Local Archive</title>
+  <meta name="description" content="A local, printable archive of a land-sale decision map and step-forward plan." />
+  <style>
+    :root{
+      --bg:#0b1220;
+      --panel:#0f1a33;
+      --panel2:#0c1830;
+      --text:#e8eefc;
+      --muted:#a9b6d6;
+      --line:rgba(255,255,255,.12);
+      --accent:#63b3ff;
+      --accent2:#a78bfa;
+      --good:#34d399;
+      --warn:#fbbf24;
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --radius: 18px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(1000px 600px at 15% 10%, rgba(99,179,255,.22), transparent 55%),
+        radial-gradient(900px 520px at 85% 18%, rgba(167,139,250,.18), transparent 55%),
+        radial-gradient(900px 620px at 50% 90%, rgba(52,211,153,.10), transparent 60%),
+        linear-gradient(180deg, #070b16, var(--bg));
+    }
+
+    .wrap{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 28px 18px 60px;
+    }
+
+    .topbar{
+      display:flex;
+      gap:10px;
+      justify-content:space-between;
+      align-items:flex-start;
+      flex-wrap:wrap;
+      margin-bottom:16px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      font-size: 13px;
+      backdrop-filter: blur(10px);
+    }
+    .dot{
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 3px rgba(99,179,255,.12);
+      flex:0 0 auto;
+    }
+
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    button{
+      appearance:none;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      padding:10px 12px;
+      border-radius: 12px;
+      cursor:pointer;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      box-shadow: 0 10px 25px rgba(0,0,0,.20);
+      font-weight: 600;
+      letter-spacing:.2px;
+    }
+    button:hover{transform: translateY(-1px); background: rgba(255,255,255,.09); border-color: rgba(255,255,255,.18)}
+    button:active{transform: translateY(0px)}
+    button.secondary{background: rgba(0,0,0,.0)}
+    button.ghost{background: rgba(255,255,255,.03)}
+
+    .card{
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+
+    .hero{
+      padding: 22px 22px 18px;
+      border-bottom:1px solid var(--line);
+      background:
+        radial-gradient(900px 300px at 20% -20%, rgba(99,179,255,.22), transparent 65%),
+        radial-gradient(700px 300px at 90% -10%, rgba(167,139,250,.18), transparent 65%),
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+    }
+
+    .title{
+      margin: 0 0 6px;
+      font-size: clamp(22px, 3.2vw, 34px);
+      line-height: 1.15;
+    }
+    .subtitle{
+      margin:0;
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 14px;
+      max-width: 75ch;
+    }
+    .meta{
+      margin-top: 14px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      color: var(--muted);
+      font-size: 12.5px;
+    }
+    .meta code{
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 2px 8px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+    }
+
+    .content{
+      padding: 18px 22px 22px;
+    }
+
+    h2{
+      margin: 16px 0 10px;
+      font-size: 18px;
+      letter-spacing: .2px;
+    }
+    p{
+      margin: 10px 0;
+      color: rgba(232,238,252,.92);
+      line-height: 1.75;
+    }
+
+    .callout{
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px 14px;
+      background: rgba(15,26,51,.55);
+    }
+
+    .callout.good{border-left: 5px solid rgba(52,211,153,.75)}
+    .callout.warn{border-left: 5px solid rgba(251,191,36,.75)}
+    .callout.note{border-left: 5px solid rgba(99,179,255,.75)}
+
+    ol{
+      margin: 10px 0 6px 20px;
+      padding:0;
+    }
+    li{
+      margin: 10px 0;
+      line-height:1.7;
+      color: rgba(232,238,252,.92);
+    }
+    li strong{color: var(--text)}
+    .divider{
+      height:1px;
+      background: var(--line);
+      margin: 18px 0;
+    }
+
+    .quote{
+      border-left: 4px solid rgba(167,139,250,.70);
+      padding: 10px 12px;
+      margin: 12px 0;
+      color: rgba(232,238,252,.92);
+      background: rgba(167,139,250,.08);
+      border-radius: 12px;
+    }
+
+    .notes{
+      margin-top: 18px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow:hidden;
+    }
+    .notes summary{
+      cursor:pointer;
+      padding: 14px 14px;
+      background: rgba(255,255,255,.04);
+      font-weight: 700;
+    }
+    .notesInner{
+      padding: 12px 14px 14px;
+      background: rgba(0,0,0,.10);
+    }
+    textarea{
+      width:100%;
+      min-height:150px;
+      resize: vertical;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px 12px;
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      line-height: 1.6;
+      outline: none;
+    }
+    textarea:focus{border-color: rgba(99,179,255,.45); box-shadow: 0 0 0 4px rgba(99,179,255,.12)}
+    .small{
+      margin-top:10px;
+      color: var(--muted);
+      font-size: 12.5px;
+      display:flex;
+      justify-content:space-between;
+      gap: 10px;
+      flex-wrap:wrap;
+    }
+    .small span{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+    }
+    .pill{
+      font-family: var(--mono);
+      padding: 2px 8px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color: rgba(232,238,252,.92);
+      font-size: 12px;
+    }
+
+    footer{
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 12.5px;
+      text-align:center;
+      padding: 14px 12px 0;
+    }
+    footer .line{
+      margin: 0 auto 10px;
+      height:1px;
+      max-width: 320px;
+      background: var(--line);
+    }
+
+    /* Print */
+    @media print{
+      body{background:#fff; color:#000}
+      .wrap{padding:0}
+      .topbar,.actions,.notes{display:none !important}
+      .card{box-shadow:none; border:1px solid #ddd}
+      .hero{background:#f7f7fb}
+      .subtitle,.meta{color:#333}
+      p,li{color:#111}
+      .callout{background:#f8f8ff}
+      footer{color:#333}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="badge" title="Local archive document">
+        <span class="dot"></span>
+        <span>Local Archive • Decision Record</span>
+      </div>
+
+      <div class="actions">
+        <button class="ghost" id="copyBtn" type="button">Copy Text</button>
+        <button class="secondary" id="exportBtn" type="button">Export .txt</button>
+        <button id="printBtn" type="button">Print / Save PDF</button>
+      </div>
+    </div>
+
+    <article class="card" id="article">
+      <header class="hero">
+        <h1 class="title">Land Sale Decision Record — Step Forward Plan</h1>
+        <p class="subtitle">
+          A preserved, printable snapshot of the decision logic derived from two land-sale scenarios (smaller sale now vs larger sale now),
+          designed to emphasize control, optionality, and low-drama execution.
+        </p>
+        <div class="meta">
+          <span>Created: <code id="createdDate">—</code></span>
+          <span>Document ID: <code id="docId">—</code></span>
+          <span>Status: <code>Archived</code></span>
+        </div>
+      </header>
+
+      <section class="content">
+        <h2>Interpretation of the Scenarios</h2>
+        <div class="callout note">
+          <p style="margin:0">
+            From the sketch, the two options read as:
+          </p>
+          <ol>
+            <li><strong>Option 1:</strong> sell a <strong>smaller piece now</strong> (about <strong>~2 acres / 16 kanals</strong>), keep <strong>~12 acres</strong> for contract income and future appreciation. Downside: potential <strong>future second sale</strong> if more money is needed.</li>
+            <li><strong>Option 2:</strong> sell a <strong>bigger chunk now</strong> (about <strong>~5 acres</strong>), keep <strong>~9 acres</strong>. Upside: <strong>one-time sale effort</strong>. Downside: permanently reduces land buffer and long-run optionality.</li>
+          </ol>
+        </div>
+
+        <div class="divider"></div>
+
+        <h2>The Most Sane Default</h2>
+        <div class="callout good">
+          <p style="margin:0">
+            <strong>Option 1 is the safest default:</strong> sell only the minimum land required to meet your defined needs, and preserve maximum optionality.
+            Land functions as an inflation hedge, a family security layer, and a psychological safety anchor. Once sold, it cannot be “rebuilt.”
+          </p>
+        </div>
+
+        <p>
+          <strong>Option 2</strong> becomes sensible only if you genuinely need a large corpus <em>right now</em> (unavoidable expense, debt clearance, or a strategic investment you’re confident about),
+          and you are receiving a clean premium deal with low execution risk.
+        </p>
+
+        <div class="divider"></div>
+
+        <h2>A Practical Step-Forward Plan (Low-Drama, High-Control)</h2>
+        <ol>
+          <li>
+            <strong>Lock your “need number” (₹ target) before talking price.</strong><br/>
+            Create one number that includes big commitments, <strong>24 months</strong> family expense buffer, medical/emergency buffer, and legal/admin costs.
+            Then sell <strong>only enough acres</strong> to cover that plus a safety margin.
+          </li>
+          <li>
+            <strong>Make the sale title-and-boundary-first (taqseem clarity).</strong><br/>
+            Ensure the exact parcel is clearly identifiable: khasra/khewat details, map, ground measurement, clean mutation/title chain, encumbrance check.
+            Avoid “we’ll fix it later” promises—those become discount tools.
+          </li>
+          <li>
+            <strong>Pick the parcel strategically.</strong><br/>
+            If selling ~2 acres, prefer the <strong>highest-demand slice</strong> (access/road-facing) so the remaining land retains strong value and usability.
+          </li>
+          <li>
+            <strong>Run a “no-pressure” price discovery loop.</strong><br/>
+            Get <strong>3 independent market signals</strong> (not the same network): two local comparables + one outsider buyer/agent.
+            You’re collecting proof-of-market, not chasing opinions.
+          </li>
+          <li>
+            <strong>Use a hard-safe transaction workflow (reduces manipulation risk).</strong><br/>
+            Use an independent lawyer. Agreement to sell should include earnest money, clear timeline, default/penalty clauses. Keep it <strong>all-white bank route</strong>.
+            Registry day should synchronize: funds transfer + deed + possession together.
+          </li>
+          <li>
+            <strong>Set a trigger rule for any future sale (if Option 1).</strong><br/>
+            Example trigger: “Only consider selling more land if corpus falls below X, or a defined opportunity appears that beats long-term land value by a wide margin.”
+            This protects future decisions from panic.
+          </li>
+        </ol>
+
+        <div class="quote">
+          <strong>Recommendation (one line):</strong><br/>
+          Proceed with <strong>Option 1</strong>—sell ~2 acres now <em>if it meets your need number</em>, execute with airtight title/boundary/registry hygiene, and keep remaining land as the long-term safety + income engine.
+        </div>
+
+        <details class="notes">
+          <summary>Personal Notes (autosaved locally)</summary>
+          <div class="notesInner">
+            <textarea id="notes" placeholder="Write your reflections, numbers, triggers, buyer notes, deal terms, or anything you want preserved alongside this record..."></textarea>
+            <div class="small">
+              <span><strong>Autosave:</strong> <span class="pill" id="saveState">idle</span></span>
+              <span><strong>Storage key:</strong> <span class="pill">land_sale_record_notes_v1</span></span>
+            </div>
+          </div>
+        </details>
+      </section>
+    </article>
+
+    <footer>
+      <div class="line"></div>
+      <div>Saved for local documentation and posterity.</div>
+      <div style="margin-top:6px">You can print this page to archive as PDF.</div>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      const createdDateEl = document.getElementById("createdDate");
+      const docIdEl = document.getElementById("docId");
+      const printBtn = document.getElementById("printBtn");
+      const copyBtn = document.getElementById("copyBtn");
+      const exportBtn = document.getElementById("exportBtn");
+      const notes = document.getElementById("notes");
+      const saveState = document.getElementById("saveState");
+      const STORAGE_KEY = "land_sale_record_notes_v1";
+
+      // Date + document id
+      const now = new Date();
+      const fmt = new Intl.DateTimeFormat(undefined, { year: "numeric", month: "short", day: "2-digit" });
+      createdDateEl.textContent = fmt.format(now);
+
+      const id = "LSR-" + now.toISOString().slice(0, 10).replaceAll("-", "") + "-" + Math.random().toString(16).slice(2, 8).toUpperCase();
+      docIdEl.textContent = id;
+
+      // Print
+      printBtn.addEventListener("click", () => window.print());
+
+      // Copy
+      copyBtn.addEventListener("click", async () => {
+        const text = getPlainText();
+        try {
+          await navigator.clipboard.writeText(text);
+          toast(copyBtn, "Copied ✓");
+        } catch (e) {
+          // Fallback
+          const ta = document.createElement("textarea");
+          ta.value = text;
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand("copy");
+          document.body.removeChild(ta);
+          toast(copyBtn, "Copied ✓");
+        }
+      });
+
+      // Export .txt
+      exportBtn.addEventListener("click", () => {
+        const text = getPlainText() + "\n\n---\nPersonal Notes:\n" + (notes.value || "[none]");
+        const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = `land-sale-decision-record_${docIdEl.textContent}.txt`;
+        document.body.appendChild(a);
+        a.click();
+        URL.revokeObjectURL(a.href);
+        a.remove();
+      });
+
+      function getPlainText() {
+        const title = "Land Sale Decision Record — Step Forward Plan";
+        const lines = [
+          title,
+          `Created: ${createdDateEl.textContent}`,
+          `Document ID: ${docIdEl.textContent}`,
+          "",
+          "Interpretation of the Scenarios:",
+          "1) Option 1: sell a smaller piece now (~2 acres/16 kanals), keep ~12 acres; contract income + appreciation; possible second sale later.",
+          "2) Option 2: sell a bigger chunk now (~5 acres), keep ~9 acres; one-time sale effort; reduces land buffer.",
+          "",
+          "The Most Sane Default:",
+          "Option 1 is the safest default: sell only the minimum land required for defined needs; preserve optionality.",
+          "Option 2 is sensible only if a large corpus is needed now AND the deal is premium + low-risk.",
+          "",
+          "A Practical Step-Forward Plan (Low-Drama, High-Control):",
+          "1) Lock your 'need number' (₹ target) before talking price. Include commitments + 24 months buffer + medical/emergency + legal/admin. Sell only enough acres + margin.",
+          "2) Title-and-boundary-first (taqseem clarity). Map/khasra/khewat, ground measurement, mutation/title chain, encumbrance check. Avoid 'fix later'.",
+          "3) Pick parcel strategically: sell highest-demand slice if selling ~2 acres.",
+          "4) No-pressure price discovery: 3 independent signals (2 local comparables + 1 outsider).",
+          "5) Hard-safe workflow: independent lawyer, earnest money, timeline, penalties, all-white bank route, synchronized registry day.",
+          "6) Future-sale trigger rule: sell again only if corpus below X or a defined opportunity beats long-term land value by a wide margin.",
+          "",
+          "Recommendation (one line):",
+          "Proceed with Option 1—sell ~2 acres now if it meets your need number, execute with airtight hygiene, and retain remaining land as safety + income engine."
+        ];
+        return lines.join("\n");
+      }
+
+      // Notes: load + autosave
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) notes.value = saved;
+      } catch (e) {
+        // ignore
+      }
+
+      let t = null;
+      notes.addEventListener("input", () => {
+        saveState.textContent = "typing…";
+        clearTimeout(t);
+        t = setTimeout(() => {
+          try {
+            localStorage.setItem(STORAGE_KEY, notes.value);
+            saveState.textContent = "saved";
+          } catch (e) {
+            saveState.textContent = "not saved";
+          }
+        }, 350);
+      });
+
+      function toast(btn, msg) {
+        const prev = btn.textContent;
+        btn.textContent = msg;
+        setTimeout(() => (btn.textContent = prev), 900);
+      }
+    })();
+  </script>
+</body>
+</html>
