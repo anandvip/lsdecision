@@ -1,1 +1,320 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vipul Anand - Land Sale Options Analysis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .context {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 35px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .context h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .context ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .context li {
+            padding: 8px 0;
+            color: #555;
+        }
+        
+        .context li:before {
+            content: "→ ";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        
+        .options-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .option {
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .option.recommended {
+            border-color: #27ae60;
+            background: #f0fff4;
+        }
+        
+        .option-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .option h3 {
+            color: #2c3e50;
+            font-size: 1.6em;
+        }
+        
+        .badge {
+            background: #27ae60;
+            color: white;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+        
+        .option-details {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .option.recommended .option-details {
+            background: white;
+        }
+        
+        .option-details h4 {
+            color: #667eea;
+            margin-bottom: 12px;
+            font-size: 1.1em;
+        }
+        
+        .option-details p {
+            color: #555;
+            margin-bottom: 10px;
+            line-height: 1.7;
+        }
+        
+        .logic-section {
+            margin-top: 20px;
+        }
+        
+        .logic-section h4 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        
+        .logic-item {
+            background: #f8f9fa;
+            padding: 12px 18px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            border-left: 3px solid #667eea;
+            color: #444;
+        }
+        
+        .recommendation {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+            color: white;
+            padding: 35px;
+            border-radius: 12px;
+            margin-top: 30px;
+        }
+        
+        .recommendation h2 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+        
+        .recommendation-content {
+            font-size: 1.05em;
+            line-height: 1.8;
+        }
+        
+        .tradeoff {
+            background: rgba(255,255,255,0.2);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        .tradeoff strong {
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .options-wrapper {
+                grid-template-columns: 1fr;
+            }
+            
+            header h1 {
+                font-size: 1.6em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Vipul Anand</h1>
+            <p>Options to Choose From with Their Logic Behind Why's and Peace of Mind</p>
+        </header>
+        
+        <div class="content">
+            <div class="context">
+                <h2>Your Situation</h2>
+                <ul>
+                    <li>7 acres under your ownership (plus 7 acres son's share)</li>
+                    <li>Managing 14 acres total on contract basis</li>
+                    <li>Need liquidity for daughter's marriage and aging expenses</li>
+                    <li>Dark zone land requiring future upkeep costs</li>
+                    <li>Tax-efficient strategy: liquid capital + agricultural contract income</li>
+                </ul>
+            </div>
+            
+            <div class="options-wrapper">
+                <div class="option">
+                    <div class="option-header">
+                        <h3>Option 1</h3>
+                    </div>
+                    
+                    <div class="option-details">
+                        <h4>Configuration</h4>
+                        <p>Sell 2 acres now from your 7-acre share</p>
+                        <p>Keep 5 acres partitioned for future sale</p>
+                        <p>12 acres remain generating contract income</p>
+                    </div>
+                    
+                    <div class="logic-section">
+                        <h4>The Logic</h4>
+                        <div class="logic-item">
+                            Smaller immediate sale, but requires returning to sale process later
+                        </div>
+                        <div class="logic-item">
+                            5-acre partition retains future flexibility
+                        </div>
+                        <div class="logic-item">
+                            Higher contract income from 12 acres
+                        </div>
+                        <div class="logic-item">
+                            Multiple sale efforts over time
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="option recommended">
+                    <div class="option-header">
+                        <h3>Option 2</h3>
+                        <span class="badge">RECOMMENDED</span>
+                    </div>
+                    
+                    <div class="option-details">
+                        <h4>Configuration</h4>
+                        <p>Sell 5 acres once from your 7-acre share</p>
+                        <p>Keep 2 acres partitioned</p>
+                        <p>9 acres remain generating contract income</p>
+                        <p><strong>Capital: ₹3 crore + ₹50 lakh cash = ₹3.5 crore</strong></p>
+                    </div>
+                    
+                    <div class="logic-section">
+                        <h4>Why This Makes Sense</h4>
+                        <div class="logic-item">
+                            ₹3.5 crore covers daughter's marriage + aging expenses cushion
+                        </div>
+                        <div class="logic-item">
+                            Single transaction - simpler than multiple sales over time
+                        </div>
+                        <div class="logic-item">
+                            2-acre partition enables industrial CLU conversion (higher value appreciation)
+                        </div>
+                        <div class="logic-item">
+                            9 acres contract income continues flowing
+                        </div>
+                        <div class="logic-item">
+                            One-time effort - no need to return to sale process later
+                        </div>
+                        <div class="logic-item">
+                            Clean execution before potential agricultural-to-urban reclassification
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="recommendation">
+                <h2>Peace of Mind Analysis</h2>
+                <div class="recommendation-content">
+                    <p>Option 2 provides a cleaner path forward because it addresses your immediate priorities with a single decisive action. The ₹3.5 crore capital gives you financial security for your daughter's marriage and creates a buffer for aging expenses.</p>
+                    
+                    <p>The 2-acre partition positioned for industrial CLU conversion offers premium appreciation potential, while the remaining 9 acres continue generating contract income.</p>
+                    
+                    <p>Most importantly, you complete this transaction once and move forward, rather than cycling back into the sale process when your negotiating position may be different.</p>
+                    
+                    <div class="tradeoff">
+                        <strong>The Trade-off:</strong>
+                        3 acres less contract income compared to Option 1, but the ₹3.5 crore capital deployment can offset this difference through strategic investments while maintaining your tax-efficient dual income structure.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
